@@ -16,6 +16,7 @@ userRouter.post('/newuser',async(req,res)=>{
     }
 })
 
+
 userRouter.get('/users',async(req,res)=>{ 
     const sort = {};
     const search = {};
@@ -43,5 +44,8 @@ userRouter.get('/users',async(req,res)=>{
     res.status(200).send(user);
 })
 
+userRouter.get('/',async(req,res)=>{
+    res.status(200).send('Try /users :- for getting users details and /newuser :- for creating new user. detail end point is explained in useRouter.js')
+})
 module.exports = userRouter
 
