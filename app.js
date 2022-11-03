@@ -1,17 +1,20 @@
-const express = require('express')
-//DB connection
-require('./DB/mongoose')
-const port = process.env.PORT || 3000 // this will get port according to env
+const express = require("express");
 
-const userRouter = require('./Router/userRouter')
+const myPromise = require("./DB/mongoose");
 
-const app = express()
+const port = process.env.PORT || 3000; // this will get port according to env
 
-app.use(express.json()) // Middleware to handle json data
+const userRouter = require("./Router/userRouter");
 
-app.use(userRouter)
+const app = express();
 
+app.use(express.json()); // Middleware to handle json data
 
-app.listen(port,()=>{
-    console.log(`Server is Running in port : ${port}`)
-})
+app.use(userRouter);
+
+myPromise
+  .then((msg) => {
+    console.log(msg);
+    app.listen(port, console.log("server is up in port", port));
+  })
+  .catch((e) => console.log("Something Wrong in DB", e));
